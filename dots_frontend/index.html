@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puntos y Cajas</title>
+    <link rel="icon" type="image/x-icon" href="./recursos/icon-game.png">
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+
+    <h1>Bienvenido a Puntos & Cajas</h1>
+
+    <!-- ========== PANELES DE LOGIN / REGISTRO (visibles al inicio) ========== -->
+    <div id="loginRegisterPanel">
+        <h3>Iniciar sesión / Registrarse</h3>
+        <input type="text" id="loginUser" placeholder="Usuario">
+        <input type="password" id="loginPass" placeholder="Contraseña">
+        <div>
+            <button id="btnLogin">Iniciar sesión</button>
+            <button id="btnShowRegister">Registrarse</button>
+        </div>
+        <div id="loginMessage"></div>
+    </div>
+
+    <div id="registerPanel" style="display: none;">
+        <h3>Registro nuevo usuario</h3>
+        <input type="text" id="regUser" placeholder="Usuario">
+        <input type="password" id="regPass" placeholder="Contraseña">
+        <div>
+            <button id="btnRegister">Registrar</button>
+            <button id="btnCancelRegister">Cancelar</button>
+        </div>
+        <div id="registerMessage"></div>
+    </div>
+
+    <div id="userInfo" style="display: none;">
+        <p>Conectado como: <span id="loggedUsername"></span></p>
+        <button id="btnLogout">Cerrar sesión</button>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="gameContainer" style="display: none;">
+        <div id="puntuacion" style="display:none;">
+            <p>Jugador 1: <span id="puntosJ1">0</span></p>
+            <p>Jugador 2: <span id="puntosJ2">0</span></p>
+        </div>
+
+        <div id="tiempoDisplay" style="display:none;">
+            Tiempo: <span id="tiempo">60</span>
+        </div>
+        <div id="menu">
+            <h2>¡Pon a prueba tu estrategia y completa más cuadros que tu rival!</h2>
+            <br>
+            <h3>Selecciona un modo</h3>
+
+            <button id="btnCPU">1 Jugador vs CPU</button>
+            <button id="btnLocal">2 Jugadores Local</button>
+            <button id="btnOnline">Online</button>
+            <button id="btnInstrucciones">Cómo jugar</button>
+
+        </div>
+        <div id="onlineMenu" style="display:none">
+            <h3>MODO ONLINE</h3>
+            <div id="onlineStatus" style="margin: 10px; color: rgb(114, 241, 252);"></div>
+            <button id="btnCrearSala">Crear Sala</button>
+            <input id="codigoInput" placeholder="Código">
+            <button id="btnUnirse">Unirse</button>
+            <button class="btnVolver">Volver</button>
+        </div>
+        <div id="cpuLevels" style="display:none;">
+            <h2>MODO 1 vs CPU</h2>
+            <h3>Selecciona dificultad</h3>
+            <button id="btnFacil">Fácil</button>
+            <button id="btnMedio">Medio</button>
+            <button id="btnDificil">Difícil</button>
+            <button class="btnVolver">Volver</button>
+        </div>
+
+
+        <div id="gridSize" style="display:none;">
+            <h2>MODO 2 JUGADORES</h2>
+            <h3>Selecciona dificultad</h3>
+            <button id="btn5">5 X 5</button>
+            <button id="btn7">7 X 7</button>
+            <button id="btn10">10 X 10</button>
+            <button id="btnRapido">60 Segundos</button>
+            <button class="btnVolver">Volver</button>
+        </div>
+
+        <div id="instrucciones" style="display:none;">
+            <h2>Instrucciones</h2>
+            <p>
+                Los jugadores dibujan líneas entre puntos.
+                Cuando completas un cuadrado ganas un punto y juegas otra vez.
+                Gana quien tenga más cuadrados al final.
+            </p>
+            <button class="btnVolver">Volver</button>
+        </div>
+        <canvas id="canvasJuego" style="display:none;"></canvas>
+
+        <h2>¡Diviértete jugando!</h2>
+
+        <div id="gameOverlay" class="overlay" style="display:none;">
+            <div class="modal">
+                <h2 id="gameResult">¡Ganador!</h2>
+                <div class="puntuacion-final">
+                    <div class="jugador">
+                        <span class="nombre">Jugador 1</span>
+                        <span class="puntos" id="finalPuntosJ1">0</span>
+                    </div>
+                    <div class="jugador">
+                        <span class="nombre">Jugador 2</span>
+                        <span class="puntos" id="finalPuntosJ2">0</span>
+                    </div>
+                </div>
+                <button id="btnReiniciar">Volver al menú</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="./script.js"></script>
+
+<script src="../dots_backend/online.js"></script>
+
+</html>

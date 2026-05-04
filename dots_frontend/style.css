@@ -1,0 +1,198 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    background: #f9d5be;
+    color: #333;
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    font-weight: 300;
+    color: #975907;
+    margin-bottom: 10px;
+}
+
+h2,
+h3 {
+    font-weight: 400;
+    color: #34495e;
+}
+/*added */
+#loginRegisterPanel,
+#registerPanel,
+#userInfo {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
+}
+
+#menu,
+#cpuLevels,
+#gridSize,
+#onlineMenu,
+#instrucciones {
+    background: rgb(255, 255, 255);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 90%;
+    margin: 20px auto;
+}
+
+button {
+    background: #ecf0f1;
+    border: none;
+    padding: 12px 24px;
+    margin: 8px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #2c3e50;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid #d0d7de;
+}
+
+button:hover {
+    background: #d0d7de;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btnVolver {
+    background: #f75a49;
+    color: white;
+    border: none;
+}
+
+.btnVolver:hover {
+    background: #c0392b;
+}
+
+
+#canvasJuego {
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+}
+
+
+#puntuacion {
+    background: white;
+    padding: 15px 30px;
+    border-radius: 40px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    display: inline-flex;
+    gap: 40px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+#puntuacion span {
+    color: #297fb9;
+    font-weight: 700;
+    margin-left: 8px;
+}
+
+#tiempoDisplay {
+    background: #b2b3b3;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 30px;
+    display: inline-block;
+    margin: 10px auto;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+#tiempo {
+    font-weight: 700;
+    color: #f65b53;
+}
+
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+}
+
+.modal h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+.puntuacion-final {
+    display: flex;
+    justify-content: space-around;
+    margin: 30px 0;
+}
+
+.jugador {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.jugador .nombre {
+    font-size: 18px;
+    color: #7f8c8d;
+}
+
+.jugador .puntos {
+    font-size: 36px;
+    font-weight: 700;
+    color: #34495e;
+}
+
+.btnReiniciar {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 40px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 10px;
+}
+
+.btnReiniciar:hover {
+    background: #2980b9;
+}
