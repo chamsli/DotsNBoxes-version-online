@@ -33,3 +33,5 @@ Leaderboard no está visible en la interfaz.
 Guardado automático de puntuaciones no integrado en el juego.
 
 Chat entre jugadores no implementado.
+
+Mejorar la interfaz. 
