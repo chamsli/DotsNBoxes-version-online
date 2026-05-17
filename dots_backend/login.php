@@ -15,13 +15,13 @@ if ($user && password_verify($password, $user['password'])) {
     $_SESSION['user_id'] = $user['id'];
     $_SESSION['username'] = $user['username'];
     echo json_encode([
-        "success" => true,
-        "user_id" => $user['id'],
+        "status" => "ok",
+        "id" => $user['id'],
         "username" => $user['username']
     ]);
 } else {
     echo json_encode([
-        "success" => false,
-        "message" => "Usuario o contraseña incorrectos"
+        "status" => "error",
+        "error" => "Usuario o contraseña incorrectos"
     ]);
 }

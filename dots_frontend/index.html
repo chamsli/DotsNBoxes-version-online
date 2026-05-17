@@ -10,134 +10,210 @@
 </head>
 
 <body>
-
-
-    <h1>Bienvenido a Puntos & Cajas</h1>
-
+<header class="app-header">
+    <div class="logo">🎲 Puntos & Cajas</div>
+    <div id="userInfo" class="user-info">
+        <span id="loggedUsername" class="username-display"></span>
+        <button id="btnLogout" class="logout-btn">Salir</button>
+    </div>
+</header>
     <!-- ========== PANELES DE LOGIN / REGISTRO (visibles al inicio) ========== -->
+
+
     <div id="loginRegisterPanel">
-        <h3>Iniciar sesión / Registrarse</h3>
+
+        <h2>Iniciar sesión</h2>
+        <br>
+
         <input type="text" id="loginUser" placeholder="Usuario">
+        <br>
         <input type="password" id="loginPass" placeholder="Contraseña">
-        <div>
-            <button id="btnLogin">Iniciar sesión</button>
-            <button id="btnShowRegister">Registrarse</button>
-        </div>
+
+        <button id="btnLogin">Entrar</button>
+
         <div id="loginMessage"></div>
+
+        <p class="switch-panel">
+            ¿No tienes cuenta?
+            <span id="goRegister">Regístrate</span>
+        </p>
+
     </div>
 
-    <div id="registerPanel" style="display: none;">
-        <h3>Registro nuevo usuario</h3>
+    <div id="registerPanel" style="display:none;">
+
+        <h2>Crear cuenta</h2>
+        <br>
+
         <input type="text" id="regUser" placeholder="Usuario">
+        <br>
         <input type="password" id="regPass" placeholder="Contraseña">
-        <div>
-            <button id="btnRegister">Registrar</button>
-            <button id="btnCancelRegister">Cancelar</button>
-        </div>
+
+        <button id="btnRegister">Crear cuenta</button>
+
         <div id="registerMessage"></div>
+
+        <p class="switch-panel">
+            ¿Ya tienes cuenta?
+            <span id="goLogin">Inicia sesión</span>
+        </p>
+
     </div>
-
-    <div id="userInfo" style="display: none;">
-        <p>Conectado como: <span id="loggedUsername"></span></p>
-        <button id="btnLogout">Cerrar sesión</button>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     <div id="gameContainer" style="display: none;">
-        <div id="puntuacion" style="display:none;">
-            <p>Jugador 1: <span id="puntosJ1">0</span></p>
-            <p>Jugador 2: <span id="puntosJ2">0</span></p>
-        </div>
 
-        <div id="tiempoDisplay" style="display:none;">
-            Tiempo: <span id="tiempo">60</span>
-        </div>
-        <div id="menu">
-            <h2>¡Pon a prueba tu estrategia y completa más cuadros que tu rival!</h2>
-            <br>
-            <h3>Selecciona un modo</h3>
+        <div class="game-main-layout">
+            <!-- LEFT -->
+            <div class="left-column">
 
-            <button id="btnCPU">1 Jugador vs CPU</button>
-            <button id="btnLocal">2 Jugadores Local</button>
-            <button id="btnOnline">Online</button>
-            <button id="btnInstrucciones">Cómo jugar</button>
+                <div id="leaderboard">
+                    <h3>🏆 Top 5 Jugadores</h3>
 
-        </div>
-        <div id="onlineMenu" style="display:none">
-            <h3>MODO ONLINE</h3>
-            <div id="onlineStatus" style="margin: 10px; color: rgb(114, 241, 252);"></div>
-            <button id="btnCrearSala">Crear Sala</button>
-            <input id="codigoInput" placeholder="Código">
-            <button id="btnUnirse">Unirse</button>
-            <button class="btnVolver">Volver</button>
-        </div>
-        <div id="cpuLevels" style="display:none;">
-            <h2>MODO 1 vs CPU</h2>
-            <h3>Selecciona dificultad</h3>
-            <button id="btnFacil">Fácil</button>
-            <button id="btnMedio">Medio</button>
-            <button id="btnDificil">Difícil</button>
-            <button class="btnVolver">Volver</button>
-        </div>
+                    <div id="leaderboardList"></div>
+                </div>
+            </div>
+            <!-- CENTER -->
+            <div class="center-column">
+                <div id="puntuacion" style="display:none;">
+                    <p>Jugador 1: <span id="puntosJ1">0</span></p>
+                    <p>Jugador 2: <span id="puntosJ2">0</span></p>
+                </div>
+
+                <div id="onlinePlayers" style="display:none;">
+                    <h3>
+                        <span id="player1Name">Jugador 1</span>
+                        VS
+                        <span id="player2Name">Jugador 2</span>
+                    </h3>
+
+                    <p id="turnoTexto"></p>
+                </div>
+
+                <div id="tiempoDisplay" style="display:none;">
+                    Tiempo: <span id="tiempo">60</span>
+                </div>
+                <div id="menu">
+                    <h2>¡Pon a prueba tu estrategia y completa más cuadros que tu rival!</h2>
+                    <br>
+                    <h3>Selecciona un modo</h3>
+
+                    <button id="btnCPU">1 Jugador vs CPU</button>
+                    <button id="btnLocal">2 Jugadores Local</button>
+                    <button id="btnOnline">Online</button>
+                    <button id="btnInstrucciones">Cómo jugar</button>
+
+                </div>
+                <div id="onlineMenu" style="display:none">
+                    <h3>MODO ONLINE</h3>
+                    <div id="onlineStatus" style="margin: 10px; color: rgb(114, 241, 252);"></div>
+                    <button id="btnCrearSala">Crear Sala</button>
+                    <input id="codigoInput" placeholder="Código">
+                    <button id="btnUnirse">Unirse</button>
+                    <button class="btnVolver">Volver</button>
+                </div>
+                <div id="cpuLevels" style="display:none;">
+                    <h2>MODO 1 vs CPU</h2>
+                    <h3>Selecciona dificultad</h3>
+                    <button id="btnFacil">Fácil</button>
+                    <button id="btnMedio">Medio</button>
+                    <button id="btnDificil">Difícil</button>
+                    <button class="btnVolver">Volver</button>
+                </div>
 
 
-        <div id="gridSize" style="display:none;">
-            <h2>MODO 2 JUGADORES</h2>
-            <h3>Selecciona dificultad</h3>
-            <button id="btn5">5 X 5</button>
-            <button id="btn7">7 X 7</button>
-            <button id="btn10">10 X 10</button>
-            <button id="btnRapido">60 Segundos</button>
-            <button class="btnVolver">Volver</button>
-        </div>
+                <div id="gridSize" style="display:none;">
+                    <h2>MODO 2 JUGADORES</h2>
+                    <h3>Selecciona dificultad</h3>
+                    <button id="btn5">5 X 5</button>
+                    <button id="btn7">7 X 7</button>
+                    <button id="btn10">10 X 10</button>
+                    <button id="btnRapido">60 Segundos</button>
+                    <button class="btnVolver">Volver</button>
+                </div>
 
-        <div id="instrucciones" style="display:none;">
-            <h2>Instrucciones</h2>
-            <p>
-                Los jugadores dibujan líneas entre puntos.
-                Cuando completas un cuadrado ganas un punto y juegas otra vez.
-                Gana quien tenga más cuadrados al final.
-            </p>
-            <button class="btnVolver">Volver</button>
-        </div>
-        <canvas id="canvasJuego" style="display:none;"></canvas>
+                <div id="instrucciones" style="display:none;">
+                    <h2>Instrucciones</h2>
+                    <p>
+                        Los jugadores dibujan líneas entre puntos.
+                        Cuando completas un cuadrado ganas un punto y juegas otra vez.
+                        Gana quien tenga más cuadrados al final.
+                    </p>
+                    <button class="btnVolver">Volver</button>
+                </div>
 
-        <h2>¡Diviértete jugando!</h2>
+                <div class="game-layout">
 
-        <div id="gameOverlay" class="overlay" style="display:none;">
-            <div class="modal">
-                <h2 id="gameResult">¡Ganador!</h2>
-                <div class="puntuacion-final">
-                    <div class="jugador">
-                        <span class="nombre">Jugador 1</span>
-                        <span class="puntos" id="finalPuntosJ1">0</span>
-                    </div>
-                    <div class="jugador">
-                        <span class="nombre">Jugador 2</span>
-                        <span class="puntos" id="finalPuntosJ2">0</span>
+                    <div class="canvas-container">
+
+                        <canvas id="canvasJuego" style="display:none;"></canvas>
+
+
+                        <!-- chat panel -->
+                        <div id="chatPanel"
+                            style="display: none; width: 300px; margin-left: 20px; background: #f0f0f0; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                            <div
+                                style="background: #2c3e50; color: white; padding: 10px; font-weight: bold; text-align: center;">
+                                Chat
+                            </div>
+                            <div id="chatMessages"
+                                style="height: 250px; overflow-y: auto; padding: 10px; background: white; display: flex; flex-direction: column; gap: 8px;">
+                            </div>
+                            <div style="display: flex; padding: 8px; gap: 8px; background: #fff;">
+                                <input type="text" id="chatInput" placeholder="Escribe un mensaje..."
+                                    style="flex: 1; padding: 8px; border-radius: 20px; border: 1px solid #ccc;">
+                                <button id="sendChatBtn"
+                                    style="background: #3498db; color: white; border: none; border-radius: 20px; padding: 0 16px; cursor: pointer;">Enviar</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <button id="btnReiniciar">Volver al menú</button>
+                <h2>¡Diviértete jugando!</h2>
+
+                <div id="gameOverlay" class="overlay" style="display:none;">
+                    <div class="modal">
+                        <h2 id="gameResult">¡Ganador!</h2>
+                        <div class="puntuacion-final">
+                            <div class="jugador">
+                                <span class="nombre">Jugador 1</span>
+                                <span class="puntos" id="finalPuntosJ1">0</span>
+                            </div>
+                            <div class="jugador">
+                                <span class="nombre">Jugador 2</span>
+                                <span class="puntos" id="finalPuntosJ2">0</span>
+                            </div>
+                        </div>
+                        <button class="btnVolver">Volver al menú</button>
+                    </div>
+                </div>
+
             </div>
+
+                <div class="right-column">
+                    <div id="playerStats">
+
+                        <h3>📊 Mis estadísticas</h3>
+                        <br>
+                        <p>🏆 Victorias: <span id="statWins">0</span></p>
+                        <br>
+                        <p>💔 Derrotas: <span id="statLosses">0</span></p>
+                        <br>
+                        <p>🤝 Empates: <span id="statDraws">0</span></p>
+                        <br>
+                        <p>🎮 Total partidas: <span id="statTotal">0</span></p>
+                    </div>
+
+                </div>
         </div>
-    </div>
 
+<footer class="app-footer">
+    <p>&copy; 2026 Puntos & Cajas • Proyecto DAW</p>
+</footer>
 </body>
-<script src="./script.js"></script>
 
-<script src="../dots_backend/online.js"></script>
+
+<script src="./script.js?v=2"></script>
+
+<script src="./online.js?v=2"></script>
 
 </html>

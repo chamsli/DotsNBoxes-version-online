@@ -1,17 +1,27 @@
 <?php
+session_start();
 require 'db.php';
-$stmt = $conn->prepare("
-    SELECT u.username, MAX(s.score) as best_score 
-    FROM scores s 
-    JOIN users u ON u.id = s.user_id 
-    GROUP BY u.id 
-    ORDER BY best_score DESC 
-    LIMIT 10
-");
-$stmt->execute();
-$result = $stmt->get_result();
-$leaderboard = [];
-while ($row = $result->fetch_assoc()) {
-    $leaderboard[] = $row;
+$sql = "SELECT
+u.username,
+SUM(s.score) AS total_score,
+COUNT(
+    CASE
+        WHEN s.result = 'WIN'
+        THEN 1
+    END
+) AS wins
+FROM scores s
+JOIN users u
+ON s.user_id = u.id
+GROUP BY s.user_id
+ORDER BY total_score DESC
+LIMIT 5";
+$result = $conn->query($sql);
+
+$data = [];
+
+while($row = $result->fetch_assoc()) {
+    $data[] = $row;
 }
-echo json_encode($leaderboard);
+
+echo json_encode($data);
