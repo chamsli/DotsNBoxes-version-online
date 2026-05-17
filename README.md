@@ -24,15 +24,15 @@ Guardado de movimientos y actualización del tablero en online.
 
 Sincronización de turnos online funciona.
 
-## Tareas pendientes
-
-Leaderboard no está visible en la interfaz.
+Leaderboard está visible en la interfaz.
 
 Guardado automático de puntuaciones no integrado en el juego.
 
 Chat entre jugadores no implementado.
 
 Mejorar la interfaz. 
+
+## Tareas pendientes
 
 web hosting.
 
