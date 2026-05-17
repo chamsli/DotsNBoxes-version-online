@@ -5,17 +5,27 @@ if (!isset($_SESSION['user_id'])) exit;
 
 $uid = $_SESSION['user_id'];
 
+// Create initial empty game state for a 5x5 grid
 $gridSize = 5;
 $spacing = (600 - 80) / ($gridSize - 1);
+
+
 $squares = [];
 for ($row = 0; $row < $gridSize - 1; $row++) {
+    $squares[$row] = [];
     for ($col = 0; $col < $gridSize - 1; $col++) {
-        $squares[$row][$col] = [
-            "top" => false, "bottom" => false, "left" => false, "right" => false,
-            "owner" => null
-        ];
-    }
-}
+        $x = 40 + $col * $spacing;
+$y = 40 + $row * $spacing;
+$squares[$row][$col] = [
+    "x" => $x,
+    "y" => $y,
+    "size" => $spacing,
+    "top" => false,
+    "bottom" => false,
+    "left" => false,
+    "right" => false,
+    "owner" => null
+];}}
 $gameState = json_encode([
     "gridSize" => $gridSize,
     "squares" => $squares,

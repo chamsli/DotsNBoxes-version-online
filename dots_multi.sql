@@ -25,23 +25,6 @@ CREATE TABLE games (
     FOREIGN KEY (current_turn) REFERENCES users(id),
     FOREIGN KEY (winner_id) REFERENCES users(id)
 );
---tengo que modificar tabla games 
-
--- CREATE TABLE dots_games (
---     id INT AUTO_INCREMENT PRIMARY KEY,
---     player1 INT NOT NULL,
---     player2 INT DEFAULT NULL,
---     turn INT,           -- ID del jugador que debe jugar
---     winner INT DEFAULT NULL,
---     game_state TEXT NOT NULL,   -- JSON con el tablero completo
---     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
---     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
---     FOREIGN KEY (player1) REFERENCES users(id),
---     FOREIGN KEY (player2) REFERENCES users(id),
---     FOREIGN KEY (turn) REFERENCES users(id),
---     FOREIGN KEY (winner) REFERENCES users(id)
--- );
-
 
 
 -- Table: scores (for leaderboard)
@@ -51,5 +34,18 @@ CREATE TABLE scores (
     score INT NOT NULL,
     game_mode ENUM('CPU', 'LOCAL', 'ONLINE') NOT NULL,
     date_played TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    result ENUM('WIN','LOSE','DRAW') DEFAULT 'DRAW',
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
+
+-- Tabla de chat (mensajes por partida)
+CREATE TABLE chat_messages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    game_id INT NOT NULL,
+    user_id INT NOT NULL,
+    message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (game_id) REFERENCES games(id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+

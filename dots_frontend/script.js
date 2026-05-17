@@ -8,6 +8,14 @@ const CONFIGURACION = {
 
 };
 
+window.actualizarPuntuacion = actualizarPuntuacion;
+window.dibujarTodo = dibujarTodo;
+window.detenerTemporizador = detenerTemporizador;
+window.Square = Square;
+window.CONFIGURACION = CONFIGURACION;
+
+
+
 const canvas = document.getElementById("canvasJuego");
 const ctx = canvas.getContext("2d");
 canvas.width = 600;
@@ -16,11 +24,10 @@ canvas.height = 600;
 const btnCPU = document.getElementById('btnCPU');
 const btnLocal = document.getElementById('btnLocal');
 const btnInstrucciones = document.getElementById('btnInstrucciones');
-const btnCrearSala = document.getElementById('btnCrearSala');
-const btnUnirse = document.getElementById('btnUnirse');
+
 const btnOnline = document.getElementById('btnOnline');
 const btnVolver = document.querySelectorAll('.btnVolver');
-const btnReiniciar = document.getElementById('btnReiniciar');
+// const btnReiniciar = document.getElementById('btnReiniciar');
 const btnFacil = document.getElementById("btnFacil");
 const btnMedio = document.getElementById("btnMedio");
 const btnDificil = document.getElementById("btnDificil");
@@ -43,10 +50,6 @@ let intervaloReloj = null;
 let tiempoRestante = CONFIGURACION.timeLimit;
 
 
-const min = 10001
-const max = 99999
-let codigoSala;
-
 btnCPU.addEventListener('click', () => seleccionarModo("CPU"));
 btnLocal.addEventListener('click', () => seleccionarModo("LOCAL"));
 btnInstrucciones.addEventListener('click', () => mostrarInstrucciones());
@@ -54,7 +57,7 @@ btnVolver.forEach(btn => {
     btn.addEventListener('click', () => volverAlMenu());
 })
 btnOnline.addEventListener('click', () => mostrarOnline());
-btnReiniciar.addEventListener('click', () => volverAlMenu());
+// btnReiniciar.addEventListener('click', () => volverAlMenu());
 btnFacil.addEventListener("click", () => setCPU("facil", 5));
 btnMedio.addEventListener("click", () => setCPU("medio", 5));
 btnDificil.addEventListener("click", () => setCPU("dificil", 5));
@@ -64,7 +67,7 @@ btn10.addEventListener('click', () => setGrid(10, false));
 btnRapido.addEventListener('click', () => setGrid(5, true));
 
 
-//modo online 
+// modo online 
 btnCrearSala.addEventListener('click', () => {
     if (!currentUserId) {
         alert('Debes iniciar sesión primero');
@@ -80,6 +83,12 @@ btnUnirse.addEventListener('click', () => {
     joinOnlineGame();
 });
 
+
+// Definición segura de toggleChat por si online.js aún no se ha cargado
+function toggleChat(show) {
+    const panel = document.getElementById('chatPanel');
+    if (panel) panel.style.display = show ? 'block' : 'none';
+}
 
 function seleccionarModo(modo) {
     CONFIGURACION.modo = modo;
@@ -107,17 +116,20 @@ function mostrarInstrucciones() {
 }
 
 function volverAlMenu() {
-    hideGame();
+    // hideGame();
     juegoActivo = false;
+    document.getElementById("menu").style.display = "block";
     document.getElementById("instrucciones").style.display = "none";
     document.getElementById("cpuLevels").style.display = "none";
     document.getElementById('gridSize').style.display = "none";
     document.getElementById("onlineMenu").style.display = "none";
-    document.getElementById("menu").style.display = "block";
     puntuacion.style.display = "none";
     document.getElementById('tiempoDisplay').style.display = "none";
     document.getElementById('gameOverlay').style.display = 'none';
     document.getElementById("canvasJuego").style.display = "none";
+    document.getElementById('gameContainer').style.display = 'block';
+    toggleChat(false);
+
 }
 
 function setCPU(level, size) {
@@ -142,6 +154,7 @@ function setGrid(size, timer) {
 }
 
 function iniciarJuego() {
+    if (CONFIGURACION.modo === 'ONLINE') return;
     document.getElementById("menu").style.display = "none";
     document.getElementById("gridSize").style.display = "none";
     document.getElementById("cpuLevels").style.display = "none";
@@ -175,20 +188,6 @@ function iniciarJuego() {
     console.log("Canvas y puntuación visibles");
 }
 
-
-// function crearSala() {
-//     console.log("Crear sala - función pendiente");
-//     codigoSala = Math.floor(Math.random() * (max - min) + min);
-//     console.log(codigoSala)
-//     codigoInput.value = codigoSala;
-
-// }
-
-
-// function unirseSala() {
-//     console.log("Unirse a sala - función pendiente");
-
-// }
 
 
 function dibujarPuntos(gridSize) {
@@ -324,7 +323,16 @@ canvas.addEventListener("click", function (e) {
                 if (!side) return;
                 if (square[side]) return; // lado marcado
 
-                marcarLinea(square, side, r, c);
+                // In online mode, only allow moves if it's the player's turn
+                if (CONFIGURACION.modo === 'ONLINE') {
+
+                    marcarLineaOnline(square, side, r, c);
+
+                } else {
+
+                    marcarLinea(square, side, r, c);
+                }
+
                 return;
             }
         }
@@ -467,8 +475,22 @@ function mensajeGanador() {
             volverAlMenu();
             return;
     }
+    let result = 'DRAW';
 
+    if (puntosJ1 > puntosJ2) {
 
+        result = 'WIN';
+
+    } else if (puntosJ1 < puntosJ2) {
+
+        result = 'LOSE';
+    }
+
+    saveScore(
+        puntosJ1,
+        CONFIGURACION.modo,
+        result
+    );
     document.getElementById('gameResult').textContent = ganador;
     document.getElementById('finalPuntosJ1').textContent = puntosJ1;
     document.getElementById('finalPuntosJ2').textContent = puntosJ2;
